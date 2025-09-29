@@ -111,4 +111,10 @@ public class ServicoService {
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
+
+    // calcular preço medio dos serviços
+    public BigDecimal calcularPrecoMedio() {
+        return rep.calcularPrecoMedio()
+                .orElse(BigDecimal.ZERO);
+    }
 }
