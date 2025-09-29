@@ -15,7 +15,7 @@ public interface PresencaRepository extends JpaRepository<Presenca, Long> {
     List<Presenca> findByAtivoTrue();
 
     // Buscar presenças de um cliente específico
-    List<Presenca> findByClienteID(Long clienteID);
+    List<Presenca> findByClienteId(Long clienteID);
 
     // Buscar presença ativa de um cliente
     Optional<Presenca> findByClienteIdAndAtivoTrue(Long clienteId);
