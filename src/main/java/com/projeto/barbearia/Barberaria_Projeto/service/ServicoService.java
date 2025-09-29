@@ -94,6 +94,7 @@ public class ServicoService {
     }
 
     // Deletar serviço
+    @Transactional
     public void deletar (Long id){
         Servico servico = rep.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Serviço não encontrado"));
