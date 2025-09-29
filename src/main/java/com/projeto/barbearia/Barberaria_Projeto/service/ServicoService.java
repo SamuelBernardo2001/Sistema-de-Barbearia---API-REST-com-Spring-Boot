@@ -93,5 +93,13 @@ public class ServicoService {
         return toDTO(rep.save(servico));
     }
 
-
+    // Deletar serviço
+    public void deletar (Long id){
+        Servico servico = rep.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Serviço não encontrado"));
+        if (rep.countAgendamentosAtivos(servico) > 0){
+            throw new IllegalStateException("Não é possível excluir serviço com agendamentos ativos.");
+        }
+        rep.delete(servico);
+    }
 }
