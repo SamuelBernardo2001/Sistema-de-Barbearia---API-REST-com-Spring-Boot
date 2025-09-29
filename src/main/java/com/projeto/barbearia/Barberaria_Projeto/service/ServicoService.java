@@ -75,6 +75,8 @@ public class ServicoService {
                 .orElseThrow(() -> new EntityNotFoundException("Serviço Não Encontrado Com Esse Nome" + nome));
     }
 
+    // Atualizar serviço
+    @Transactional
     public ServicoResponseDTO atualizar (ServicoUpdateDTO atualizar){
         Servico servico = rep.findById(atualizar.id())
                 .orElseThrow(() -> new EntityNotFoundException("Serviço não Encontrado"));
@@ -90,4 +92,6 @@ public class ServicoService {
 
         return toDTO(rep.save(servico));
     }
+
+
 }
