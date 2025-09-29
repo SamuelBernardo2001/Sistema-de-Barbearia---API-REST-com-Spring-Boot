@@ -103,4 +103,12 @@ public class ServicoService {
         }
         rep.delete(servico);
     }
+
+    // Buscar por faixa de preço
+    public List<ServicoResponseDTO> buscarPorFaixaPreco(BigDecimal min, BigDecimal max){
+        return rep.findByPrecoBetween(min, max)
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
 }
