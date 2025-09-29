@@ -10,6 +10,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ServicoService {
@@ -34,6 +36,8 @@ public class ServicoService {
     private ServicoResponseDTO toDTO(Servico servico){
         return new ServicoResponseDTO(servico.getId(), servico.getNome(), servico.getPreco());
     }
+
+    // Criar novo serviço com validações
     @Transactional
     public ServicoResponseDTO salvar (ServicoCreateDTO salvar){
         if(rep.findByNome(salvar.nome()).isPresent()){
@@ -46,5 +50,13 @@ public class ServicoService {
 
         Servico entity = toEntityCreate(salvar);
         return toDTO(rep.save(entity));
+    }
+
+    // Listar todos
+    public List<ServicoResponseDTO> listar(){
+        return rep.findAll()
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 }
