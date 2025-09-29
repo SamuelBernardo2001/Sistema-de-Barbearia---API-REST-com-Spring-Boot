@@ -74,4 +74,20 @@ public class ServicoService {
                 .map(this::toDTO)
                 .orElseThrow(() -> new EntityNotFoundException("Serviço Não Encontrado Com Esse Nome" + nome));
     }
+
+    public ServicoResponseDTO atualizar (ServicoUpdateDTO atualizar){
+        Servico servico = rep.findById(atualizar.id())
+                .orElseThrow(() -> new EntityNotFoundException("Serviço não Encontrado"));
+
+        if (!servico.getNome().equals(atualizar.nome()) && rep.findByNome(atualizar.nome()).isPresent()) {
+            throw new DataIntegrityViolationException("Já existe um serviço com este nome.");
+        }
+        if (atualizar.preco().compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("O preço deve ser maior que zero.");
+        }
+        servico.setNome(atualizar.nome());
+        servico.setPreco(atualizar.preco());
+
+        return toDTO(rep.save(servico));
+    }
 }
