@@ -5,6 +5,7 @@ import com.projeto.barbearia.Barberaria_Projeto.dto.ServicoResponseDTO;
 import com.projeto.barbearia.Barberaria_Projeto.dto.ServicoUpdateDTO;
 import com.projeto.barbearia.Barberaria_Projeto.model.Servico;
 import com.projeto.barbearia.Barberaria_Projeto.repository.ServicoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -58,5 +59,19 @@ public class ServicoService {
                 .stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    // Buscar Por Id
+    public ServicoResponseDTO buscarPorId(Long id) {
+        return rep.findById(id)
+                .map(this::toDTO)
+                .orElseThrow(() -> new EntityNotFoundException("Serviço não encontrado com ID " + id));
+    }
+
+    // Buscar Por Nome
+    public ServicoResponseDTO buscarPorNome (String nome){
+        return rep.findByNome(nome)
+                .map(this::toDTO)
+                .orElseThrow(() -> new EntityNotFoundException("Serviço Não Encontrado Com Esse Nome" + nome));
     }
 }
