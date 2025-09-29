@@ -1,6 +1,7 @@
 package com.projeto.barbearia.Barberaria_Projeto.service;
 
 import com.projeto.barbearia.Barberaria_Projeto.dto.ServicoCreateDTO;
+import com.projeto.barbearia.Barberaria_Projeto.dto.ServicoEstatisticasDTO;
 import com.projeto.barbearia.Barberaria_Projeto.dto.ServicoResponseDTO;
 import com.projeto.barbearia.Barberaria_Projeto.dto.ServicoUpdateDTO;
 import com.projeto.barbearia.Barberaria_Projeto.model.Servico;
@@ -75,6 +76,14 @@ public class ServicoService {
                 .orElseThrow(() -> new EntityNotFoundException("Serviço Não Encontrado Com Esse Nome" + nome));
     }
 
+    // Buscar serviços por parte do nome (case-insensitive)
+    public List<ServicoResponseDTO> buscarPorParteDoNome(String nome) {
+        return rep.findByNomeContainingIgnoreCase(nome)
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
     // Atualizar serviço
     @Transactional
     public ServicoResponseDTO atualizar (ServicoUpdateDTO atualizar){
@@ -116,5 +125,15 @@ public class ServicoService {
     public BigDecimal calcularPrecoMedio() {
         return rep.calcularPrecoMedio()
                 .orElse(BigDecimal.ZERO);
+    }
+
+    // Estatísticas de serviços
+    public ServicoEstatisticasDTO gerarRelatorioEstatisticas() {
+        Long total = rep.totalServicos();
+        BigDecimal minimo = rep.precoMinimo();
+        BigDecimal maximo = rep.precoMaximo();
+        BigDecimal media = rep.calcularPrecoMedio().orElse(BigDecimal.ZERO);
+
+        return new ServicoEstatisticasDTO(total, minimo, maximo, media);
     }
 }
