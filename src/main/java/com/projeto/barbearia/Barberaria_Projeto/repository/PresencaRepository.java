@@ -35,7 +35,6 @@ public interface PresencaRepository extends JpaRepository<Presenca, Long> {
     // Listar histórico completo de presenças
     @Query("SELECT p FROM Presenca p ORDER BY p.entrada DESC")
     List<Presenca> historicoPresencas();
-
     // Contagem rápida de presentes ativos
     Long countByAtivoTrue();
     /*
