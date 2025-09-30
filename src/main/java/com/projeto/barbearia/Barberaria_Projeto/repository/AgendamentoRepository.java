@@ -14,10 +14,10 @@ import java.util.List;
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
 
     // busca cliente por id
-    List<Agendamento> findByClienteID (Cliente cliente);
+    List<Agendamento> findByCliente (Cliente cliente);
 
     // busca barbeiro por id
-    List<Agendamento> findByBarbeiroID (Funcionario barbeiro);
+    List<Agendamento> findByBarbeiro (Funcionario barbeiro);
 
     // Buscar agendamentos futuros de um barbeiro
     @Query("SELECT a FROM Agendamento a WHERE a.barbeiro = :barbeiro AND a.dataHora > :agora")

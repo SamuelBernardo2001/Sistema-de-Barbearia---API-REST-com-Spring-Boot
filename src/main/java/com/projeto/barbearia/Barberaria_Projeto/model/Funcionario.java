@@ -1,9 +1,6 @@
 package com.projeto.barbearia.Barberaria_Projeto.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,9 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "Funcionarios")
+@Table(name = "funcionarios")
 public class Funcionario extends Pessoa{
 
     @Enumerated(EnumType.STRING)
     private Cargo cargo;
+
+    @Column(name = "ativo")
+    private boolean ativo;
 }
