@@ -1,2 +1,30 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
+
+# Maven
+/target/
+/pom.xml.tag
+/pom.xml.releaseBackup
+/pom.xml.versionsBackup
+/logs/
+
+# IntelliJ IDEA
+/.idea/
+/*.iml
+/out/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Spring Boot
+spring-boot-devtools.properties
+
+# Others
+*.log
