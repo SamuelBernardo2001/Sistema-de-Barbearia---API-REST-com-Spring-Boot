@@ -11,7 +11,7 @@ import java.util.List;
 public interface HorarioDisponivelRepository extends JpaRepository<HorarioDisponivel, Long> {
 
     // Buscar todos os horários de um barbeiro
-    List<HorarioDisponivel> findAllById(Long barbeiroID);
+    List<HorarioDisponivel> findAllById(Long barbeiroId);
 
     // Verificar se existe sobreposição de horário para um barbeiro
     @Query("""
@@ -19,7 +19,7 @@ public interface HorarioDisponivelRepository extends JpaRepository<HorarioDispon
            FROM HorarioDisponivel h
            WHERE h.barbeiro.id = :barbeiroId
            AND (
-                (h.inicio <= :fim AND h.fim >= :inicio) -- sobreposição
+                (h.inicio <= :fim AND h.fim >= :inicio)
            )
            """)
     boolean existeConflito(

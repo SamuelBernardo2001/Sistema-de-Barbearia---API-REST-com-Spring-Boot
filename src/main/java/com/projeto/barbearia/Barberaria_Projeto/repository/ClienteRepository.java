@@ -24,6 +24,6 @@ public interface ClienteRepository extends JpaRepository<Cliente,Long> {
     Long countClientesHoje();
 
     // Relatório: novos clientes em uma semana
-    @Query("SELECT COUNT(c) FROM Cliente c WHERE c.dataCadastro >= CURRENT_DATE - 7")
+    @Query("SELECT COUNT(c) FROM Cliente c WHERE c.dataCadastro >= CURRENT_DATE - 7 day")
     Long countClientesUltimaSemana();
 }

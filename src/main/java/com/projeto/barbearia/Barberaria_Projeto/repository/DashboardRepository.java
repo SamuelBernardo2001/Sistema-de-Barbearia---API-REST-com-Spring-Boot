@@ -1,10 +1,12 @@
 package com.projeto.barbearia.Barberaria_Projeto.repository;
 
+import com.projeto.barbearia.Barberaria_Projeto.model.Agendamento;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DashboardRepository {
+public interface DashboardRepository extends JpaRepository<Agendamento, Long> {
 
     // Total de agendamentos
     @Query("SELECT COUNT(a) FROM Agendamento a")
